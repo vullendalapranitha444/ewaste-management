@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - EcoRecycle</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">
+        ♻️ EcoRecycle
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+
+        <a href="{{ url_for('submit_waste') }}">
+            Submit E-Waste
+        </a>
+
+        <a href="{{ url_for('pickup') }}">
+            Pickup
+        </a>
+
+        <a href="{{ url_for('rewards') }}">
+            Rewards
+        </a>
+
+        <a href="{{ url_for('history') }}">
+            History
+        </a>
+
+        <a href="{{ url_for('logout') }}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+    <div class="dashboard-header">
+
+        <h1>
+            Welcome, {{ user["name"] }} 👋
+        </h1>
+
+        <p>
+            Manage your electronic waste responsibly.
+        </p>
+
+    </div>
+
+
+    {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+
+            {% for message in messages %}
+
+                <div class="success-message">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="card-icon">
+                ♻️
+            </div>
+
+            <h3>E-Waste</h3>
+
+            <h2>
+                {{ total_waste }}
+            </h2>
+
+            <p>
+                Items Submitted
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🚚
+            </div>
+
+            <h3>Pickups</h3>
+
+            <h2>
+                {{ total_pickups }}
+            </h2>
+
+            <p>
+                Total Requests
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🏆
+            </div>
+
+            <h3>Rewards</h3>
+
+            <h2>
+                {{ user["points"] }}
+            </h2>
+
+            <p>
+                Reward Points
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="welcome-box">
+
+        <h2>
+            Give Your E-Waste a New Life 🌱
+        </h2>
+
+        <p>
+            Submit your unwanted electronic devices,
+            choose your pickup location and earn reward
+            points while helping the environment.
+        </p>
+
+        <a class="button"
+           href="{{ url_for('submit_waste') }}">
+
+            Schedule E-Waste Pickup
+
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

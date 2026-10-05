@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>History - EcoRecycle</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">
+        ♻️ EcoRecycle
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('submit_waste') }}">
+            Submit
+        </a>
+
+        <a href="{{ url_for('pickup') }}">
+            Pickup
+        </a>
+
+        <a href="{{ url_for('rewards') }}">
+            Rewards
+        </a>
+
+        <a href="{{ url_for('logout') }}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+    <h1>
+        📋 E-Waste History
+    </h1>
+
+    <p>
+        View all your previous e-waste submissions.
+    </p>
+
+
+    {% if history %}
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Type</th>
+
+                    <th>Quantity</th>
+
+                    <th>Location</th>
+
+                    <th>Date</th>
+
+                    <th>Status</th>
+
+                    <th>Points</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+            {% for item in history %}
+
+                <tr>
+
+                    <td>
+                        {{ item["waste_type"] }}
+                    </td>
+
+                    <td>
+                        {{ item["quantity"] }}
+                    </td>
+
+                    <td>
+                        {{ item["location"] }}
+                    </td>
+
+                    <td>
+                        {{ item["pickup_date"] }}
+                    </td>
+
+                    <td>
+                        <span class="status">
+                            {{ item["status"] }}
+                        </span>
+                    </td>
+
+                    <td>
+                        {{ item["points"] }}
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <div class="empty-box">
+
+        <h2>
+            No History Available
+        </h2>
+
+        <p>
+            Your e-waste submissions will appear here.
+        </p>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+
+</html>
